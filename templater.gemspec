@@ -27,7 +27,6 @@ files and so forth.}
   s.rubyforge_project = %q{templater}
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Templater has the ability to both copy files from A to B and also to render templates using ERB}
-  s.test_files = ["test/test_helper.rb", "test/test_templater.rb"]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
