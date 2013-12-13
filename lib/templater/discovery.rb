@@ -59,13 +59,18 @@ module Templater
       if Gem.respond_to?(:latest_gem_paths)
         Gem.latest_gem_paths
       else
-        gems = Gem.cache.inject({}) do |latest_gems, cache|
-          name, gem = cache
-          currently_latest = latest_gems[gem.name]
-          latest_gems[gem.name] = gem if currently_latest.nil? or gem.version > currently_latest.version
-          latest_gems
-        end
-        gems.values.map{|g| g.full_gem_path}
+        if Gem.respond_to?(:cache)
+          gems = Gem.cache.inject({}) do |latest_gems, cache|
+            name, gem = cache
+            currently_latest = latest_gems[gem.name]
+            latest_gems[gem.name] = gem if currently_latest.nil? or gem.version > currently_latest.version
+            latest_gems
+          end
+          gems.values.map{|g| g.full_gem_path}
+	else
+	  # recent versions
+          Gem::Specification.entries.map{|g| g.full_gem_path}
+	end
       end
     end
 
